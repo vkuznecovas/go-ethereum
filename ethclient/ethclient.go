@@ -37,6 +37,10 @@ type Client struct {
 	c *rpc.Client
 }
 
+func (ec *Client) Reconnect(ctx context.Context) error {
+	return ec.c.Reconnect(ctx)
+}
+
 // Dial connects a client to the given URL.
 func Dial(rawurl string) (*Client, error) {
 	return DialContext(context.Background(), rawurl)

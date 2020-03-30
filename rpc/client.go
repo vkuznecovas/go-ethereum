@@ -483,7 +483,7 @@ func (c *Client) send(ctx context.Context, op *requestOp, msg interface{}) error
 func (c *Client) write(ctx context.Context, msg interface{}, retry bool) error {
 	// The previous write failed. Try to establish a new connection.
 	if c.writeConn == nil {
-		if err := c.reconnect(ctx); err != nil {
+		if err := c.Reconnect(ctx); err != nil {
 			return err
 		}
 	}
@@ -497,7 +497,7 @@ func (c *Client) write(ctx context.Context, msg interface{}, retry bool) error {
 	return err
 }
 
-func (c *Client) reconnect(ctx context.Context) error {
+func (c *Client) Reconnect(ctx context.Context) error {
 	if c.reconnectFunc == nil {
 		return errDead
 	}
